@@ -14,7 +14,19 @@ import {
   faUser,
   faClipboardList
 } from '@fortawesome/free-solid-svg-icons';
-const icons = [faSignsPost, faMapMarkerAlt, faUserFriends, faCalendarAlt, faBriefcase, faNewspaper, faStoreAlt, faBullhorn, faUser, faClipboardList];
+const icons = [
+  { icon: faSignsPost, title: "Post" },
+  { icon: faMapMarkerAlt, title: "Map Marker" },
+  { icon: faUserFriends, title: "User Friends" },
+  { icon: faCalendarAlt, title: "Calendar" },
+  { icon: faBriefcase, title: "Briefcase" },
+  { icon: faNewspaper, title: "Newspaper" },
+  { icon: faStoreAlt, title: "Store" },
+  { icon: faBullhorn, title: "Bullhorn" },
+  { icon: faUser, title: "User" },
+  { icon: faClipboardList, title: "Clipboard List" }
+];
+
 
 
 const AllMenu = () => {
@@ -128,7 +140,7 @@ const AllMenu = () => {
               <div className="all_right_circle">
                 <FontAwesomeIcon icon={item} />
               </div>
-              <span>{item.name}</span>
+              <span>{item.title}</span>
             </div>
           ))}
         </div>
