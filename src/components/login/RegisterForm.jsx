@@ -5,19 +5,25 @@ import RegisterInput from "../inputs/registerInput/RegisterInput";
 import { useState } from "react";
 import DateOfBirthSelect from "../../pages/login/DateOfBirthSelect";
 import GenderSelect from "../../pages/login/GenderSelect";
+import DotLoader from "react-spinners/DotLoader";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-const userInfos = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  password: "",
-  bYear: new Date().getFullYear(),
-  bMonth: new Date().getMonth() + 1,
-  bDay: new Date(),
-  gender: "",
-};
-
-const RegisterForm = () => {
+const RegisterForm = ({ setVisible }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userInfos = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    bYear: new Date().getFullYear(),
+    bMonth: new Date().getMonth() + 1,
+    bDay: new Date(),
+    gender: "",
+  };
   const [user, setUser] = useState(userInfos);
 
   const {
@@ -37,7 +43,6 @@ const RegisterForm = () => {
   };
 
   const dateTem = new Date().getFullYear();
-  // dropdown values for date of birth
   const years = Array.from(new Array(100), (val, idx) => dateTem - idx);
   const months = Array.from(new Array(12), (val, idx) => 1 + idx);
   const getDayes = () => {
@@ -66,12 +71,43 @@ const RegisterForm = () => {
 
   const [dateErr, setDateErr] = useState("");
   const [genderErr, setGenderErr] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const BASE_URL = "http://localhost:8000";
+  const registerSubmit = async () => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/register`, {
+        first_name,
+        last_name,
+        email,
+        password,
+        bYear,
+        bMonth, // Ensure it's named correctly here
+        bDay,
+        gender,
+      });
+      setError("");
+      setSuccess(data.message);
+      const { message, ...rest } = data;
+      setTimeout(() => {
+        dispatch({ type: "LOGIN", payload: rest });
+        Cookies.set("user", JSON.stringify(rest));
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      setLoading(false);
+      setSuccess("");
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <MdClose className="exit_icon" />
+          <MdClose className="exit_icon" onClick={() => setVisible(false)} />
           <span>Sign Up</span>
           <span>It's quick and easy</span>
         </div>
@@ -95,11 +131,11 @@ const RegisterForm = () => {
             let noMoreThen70 = new Date(1970 + 70, 0, 1);
             if (current_date - picked_date < atleast14) {
               setDateErr(
-                "It looks like you've entered the wrog info. Please make sure that you use your real date of birth."
+                "It looks like you've entered the wrong info. Please make sure that you use your real date of birth."
               );
             } else if (current_date - picked_date > noMoreThen70) {
               setDateErr(
-                "It looks like you've entered the wrog info. Please make sure that you use your real date of birth."
+                "It looks like you've entered the wrong info. Please make sure that you use your real date of birth."
               );
             } else if (gender === "") {
               setDateErr("");
@@ -109,6 +145,7 @@ const RegisterForm = () => {
             } else {
               setDateErr("");
               setGenderErr("");
+              registerSubmit();
             }
           }}
         >
@@ -157,7 +194,7 @@ const RegisterForm = () => {
               </div>
               <div className="reg_col">
                 <div className="reg_line_header">
-                  Grnder <i className="info_icon"></i>
+                  Gender <i className="info_icon"></i>
                 </div>
                 <GenderSelect
                   handleRegisterChange={handleRegisterChange}
@@ -171,10 +208,22 @@ const RegisterForm = () => {
                 from us and can opt out at any time.
               </div>
               <div className="reg_btn_wrapper">
-                <button className="blue_btn open_signup register_btn">
+                <button
+                  type="submit"
+                  className="blue_btn open_signup register_btn"
+                >
                   Sign Up
                 </button>
               </div>
+              <DotLoader
+                color="#1876f2"
+                loading={loading}
+                size={30}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+              {error && <div className="error_text">{error}</div>}
+              {success && <div className="success_text">{success}</div>}
             </Form>
           )}
         </Formik>

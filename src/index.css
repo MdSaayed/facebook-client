@@ -53,3 +53,24 @@
   background: rgba(255, 255, 255, 0.768);
   z-index: 99;
 }
+
+/* hover style */
+.hover1:hover {
+  background-color: var(--bg-secondary);
+}
+
+.card{
+  height: 550px;
+  width: 500px;
+  background: red;
+}
+
+/* Scrollbar */
+.scrollbar::-webkit-scrollbar{
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-thumb{
+  background-color: #aeaeafa1;
+  border-radius: 5px;
+}
+/* Scrollbar */

@@ -1,6 +1,6 @@
 .input_wrap {
   position: relative;
-  width: 320px;
+  width: 320px !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,11 +65,14 @@
   width: 300px;
   left: -21.5rem;
 }
-.error_arrow_left{
-border-left: 10px solid #b94a48;
-border-top: solid transparent;
-border-bottom: 10px solid transparent;
-position: absolute;
-right: -10px;
-top: 13px;
+.error_arrow_left {
+  border-left: 10px solid #b94a48;
+  border-top: solid transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  right: -10px;
+  top: 13px;
+}
+.input_wrap.register_input_wrap {
+  width: 100% !important;
 }

@@ -26,21 +26,9 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
           )}
         </div>
       )}
-      <input
-        className={meta.touched && meta.error ? "input_error_border" : ""}
-        type={field.type}
-        name={field.name}
-        placeholder={placeholder}
-        {...field}
-        {...props}
-      />
+      <input className={meta.touched && meta.error ? "input_error_border" : ""} type={field.type} name={field.name} placeholder={placeholder} {...field} {...props} />
       {meta.touched && meta.error && bottom && (
-        <div
-          className={
-            desktopView ? "input_error input_error_desktop" : "input_error"
-          }
-          style={{ transform: "translateY(2px)" }}
-        >
+        <div className={desktopView ? "input_error input_error_desktop" : "input_error"} style={{ transform: "translateY(2px)" }}>
           {meta.touched && meta.error && <ErrorMessage name={field.name} />}
           {meta.touched && meta.error && (
             <div className={desktopView ? "error_arrow_left" : "error_arrow_top"}></div>
@@ -51,7 +39,7 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
         // Use desktopView here
         <MdOutlineErrorOutline
           className="error_icon"
-          style={{ top: `${!bottom && !desktopView ? "67%":"15px"}` }}
+          style={{ top: `${!bottom && !desktopView ? "67%" : "15px"}` }}
         />
       )}
     </div>
