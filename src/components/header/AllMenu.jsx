@@ -2,29 +2,35 @@ import Search from "../search/Search";
 import { menu } from "../../data/allMenu";
 import AllMenuItem from "./AllMenuItem";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { IoIosBook } from "react-icons/io";
+import { RiVideoChatFill } from "react-icons/ri";
+import { TbStarOff } from "react-icons/tb";
+import { IoFlagSharp } from "react-icons/io5";
+import { HiSpeakerphone } from "react-icons/hi";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { MdEventNote } from "react-icons/md";
+import { IoIosCart } from "react-icons/io";
+
+
 import {
   faSignsPost,
-  faMapMarkerAlt, // Import other necessary icons from Font Awesome
-  faUserFriends,
-  faCalendarAlt,
-  faBriefcase,
-  faNewspaper,
-  faStoreAlt,
   faBullhorn,
-  faUser,
-  faClipboardList
 } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
 const icons = [
   { icon: faSignsPost, title: "Post" },
-  { icon: faMapMarkerAlt, title: "Map Marker" },
-  { icon: faUserFriends, title: "User Friends" },
-  { icon: faCalendarAlt, title: "Calendar" },
-  { icon: faBriefcase, title: "Briefcase" },
-  { icon: faNewspaper, title: "Newspaper" },
-  { icon: faStoreAlt, title: "Store" },
-  { icon: faBullhorn, title: "Bullhorn" },
-  { icon: faUser, title: "User" },
-  { icon: faClipboardList, title: "Clipboard List" }
+  { icon: IoIosBook, title: "Story" },
+  { icon: RiVideoChatFill, title: "Reel" },
+  { icon: TbStarOff, title: "Life event" },
+  { icon: IoFlagSharp, title: "Page" },
+  { icon: HiSpeakerphone, title: "Ad" },
+  { icon: MdEventNote, title: "Event" },
+  { icon: HiOutlineUserGroup, title: "Group" },
+  { icon: IoIosCart, title: "Marketplace listing" },
 ];
 
 
@@ -135,14 +141,19 @@ const AllMenu = () => {
         </div>
         <div className="all_right">
           <div className="all_right_header">Create</div>
-          {icons.map((item, idx) => (
-            <div key={`create_${idx}`} className="all_right_item hover1">
+          {icons?.map((item, idx) => (
+            <div key={idx} className="all_right_item hover1">
               <div className="all_right_circle">
-                <FontAwesomeIcon icon={item} />
+                {item?.icon && typeof item?.icon === 'object' && item?.icon?.iconName ? (
+                  <FontAwesomeIcon icon={item?.icon} />
+                ) : (
+                  <item.icon />
+                )}
               </div>
-              <span>{item.title}</span>
+              <span>{item?.title}</span>
             </div>
           ))}
+
         </div>
       </div>
     </div>
