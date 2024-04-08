@@ -86,7 +86,9 @@ const Header = () => {
         </Link>
         <div className={`circle_icon hover1 ${showAllMenu && "active_header"}`} ref={allMenu}>
           <div onClick={() => setShowAllMenu((prev) => !prev)}>
-            <MenuIcon />
+            <div style={{ transform: "translateY(2px)" }}>
+              <MenuIcon />
+            </div>
           </div>
           {showAllMenu && <AllMenu />}
         </div>
@@ -98,7 +100,7 @@ const Header = () => {
           <div className="right_notification">5</div>
         </div>
         <div className={`circle_icon hover1 ${showUserMenu && "active_header"}`} ref={userMenu} onClick={() => setShowUserMenu((prev) => !prev)}>
-          <div>
+          <div style={{ transform: "translateY(2px)" }}>
             <DownArrow />
           </div>
           {showUserMenu && <UserMenu user={user} />}

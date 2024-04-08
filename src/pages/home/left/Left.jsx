@@ -1,6 +1,5 @@
 import LeftLink from "./LeftLink";
 import "./style.css";
-import { useSelector } from "react-redux";
 import { left } from "../../../data/home";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
@@ -8,8 +7,7 @@ import { useState } from "react";
 import Shortcut from "./Shortcut";
 
 
-const LeftHome = () => {
-    const { user } = useSelector((state) => state);
+const LeftHome = ({ user }) => {
     const [visible, setVisible] = useState(false);
 
     return (

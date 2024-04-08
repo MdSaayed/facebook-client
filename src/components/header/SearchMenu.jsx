@@ -13,6 +13,8 @@ const SearchMenu = ({ color, setShowSearchMenu }) => {
   useEffect(() => {
     input.current.focus();
   }, []);
+
+
   return (
     <div className="header_left search_area scrollbar" ref={menu}>
       <div className="search_wrap">
