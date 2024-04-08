@@ -1,7 +1,7 @@
 
 const LeftLink = ({ img, text, notification }) => {
     return (
-        <div className="left_link">
+        <div className="left_link hover1">
             <img src={`../../../left/${img}.png`} alt="" />
             {
                 notification !== undefined ? (
