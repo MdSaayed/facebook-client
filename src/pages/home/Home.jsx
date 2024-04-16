@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 import "./style.css";
 import Stories from "../../components/home/stories/Stories";
 import CreatePost from "../../components/createPost/CreatePost";
+import SendVerification from "../../components/home/sendVerification/SendVerification";
+
 
 
 const Home = () => {
   const [visible, setVisible] = useState(true);
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => ({ ...state }));
 
   const el = useRef(null);
   useClickOutside(el, () => {
@@ -24,6 +26,7 @@ const Home = () => {
       <LeftHome user={user} />
       <div className="home_middle">
         <Stories />
+        {user.verified === false && <SendVerification user={user} />}
         <CreatePost user={user} />
       </div >
       < RightHome user={user} />

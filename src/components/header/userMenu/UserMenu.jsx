@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbMessageReport } from "react-icons/tb";
 import { IoMdSettings, IoMdHelpCircle } from "react-icons/io";
 import { SlArrowRight } from "react-icons/sl";
 import { MdDarkMode } from "react-icons/md";
 import { HiLogout } from "react-icons/hi";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 import SettingPrivacy from "./SettingPrivacy";
 import HelpSupport from "./HelpSupport";
 import DisplayAccessibility from "./DisplayAccessibility";
@@ -16,6 +18,17 @@ import DisplayAccessibility from "./DisplayAccessibility";
 
 const UserMenu = ({ user }) => {
     const [visible, setVisible] = useState(0);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    // logout
+    const logout = () => {
+        Cookies.set("user", "")
+        dispatch({
+            type: "LOGOUT",
+        })
+        navigate("/login")
+    }
+
     return (
         <div className="mmenu">
             {visible === 0 && <>
@@ -65,7 +78,7 @@ const UserMenu = ({ user }) => {
                             <SlArrowRight />
                         </div>
                     </div>
-                    <div className="mmenu_item hover3">
+                    <div className="mmenu_item hover3" onClick={() => logout()}>
                         <div className="small_circle">
                             <HiLogout />
                         </div>
