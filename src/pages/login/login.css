@@ -25,7 +25,7 @@
   box-shadow: 0 1px 2px var(--shadow-1);
   padding: 1rem;
   padding-bottom: 2rem;
-  width: 350px !important;
+  width: 350px  ;
   height: fit-content;
   margin: 1rem auto;
   border-radius: 10px;
@@ -53,9 +53,9 @@
 }
 .open_signup {
   background: var(--green-color);
-  width: 70% !important;
-  font-weight: 600 !important;
-  font-size: 17px !important;
+  width: 70%  ;
+  font-weight: 600  ;
+  font-size: 17px  ;
   margin-top: 1rem;
 }
 .sign_extra {
@@ -286,7 +286,7 @@
     width: 400px;
   }
   .input_wrap {
-    width: 100% !important;
+    width: 100%  ;
   }
   .login_footer_wrap {
     max-width: 900px;

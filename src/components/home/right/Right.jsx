@@ -1,4 +1,4 @@
-import Search from "../../../components/search/Search";
+import Search from "../../search/Search";
 import Contact from "./Contact";
 import "./style.css";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
