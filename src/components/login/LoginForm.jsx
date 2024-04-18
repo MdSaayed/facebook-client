@@ -96,7 +96,7 @@ const LoginForm = ({ setVisible }) => {
               </Form>
             )}
           </Formik>
-          <Link to={"/forgot"} className="forgot_password">
+          <Link to={"/reset"} className="forgot_password">
             Forgotten password
           </Link>
           <DotLoader
