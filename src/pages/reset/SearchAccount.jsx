@@ -19,6 +19,7 @@ const SearchAccount = ({ email, setEmail, error, setError, setLoading, setUserIn
             setUserInfos(data);
             setVisible(1);
             setError("");
+            setLoading(false);
         } catch (error) {
             setError(error.response ? error.response.data.message : "An error occurred.");
         } finally {

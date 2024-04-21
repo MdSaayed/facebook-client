@@ -1,6 +1,21 @@
 import { Link } from "react-router-dom";
+import axios from "axios"
 
-const SendEmail = ({ userInfos }) => {
+const SendEmail = ({ email, userInfos, error, setError, setLoading, setVisible, setUserInfos }) => {
+
+    const sendEmail = async () => {
+        try {
+            setLoading(true);
+            await axios.post(`http://localhost:8000/sendResetPasswordCode`, { email });
+            setError('');
+            setVisible(2);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            setError(error.response.data.message);
+        }
+    }
+
     return (
         <div className="reset_form dynamic_height">
             <div className="reset_form_header">Reset Your Password</div>
@@ -23,11 +38,13 @@ const SendEmail = ({ userInfos }) => {
                     <span>Facebook user</span>
                 </div>
             </div>
+            {error && <div className="error_text" style={{ padding: "10px" }}>{error}</div>}
+
             <div className="reset_form_btns">
                 <Link to="/login" className="gray_btn">
                     Not You ?
                 </Link>
-                <button type="submit" className="blue_btn">
+                <button onClick={() => sendEmail()} className="blue_btn">
                     Continue
                 </button>
             </div>

@@ -8,6 +8,7 @@ import "./style.css";
 import Stories from "../../components/home/stories/Stories";
 import CreatePost from "../../components/createPost/CreatePost";
 import SendVerification from "../../components/home/sendVerification/SendVerification";
+import CreatePostPopup from "../../components/createPostPopup/CreatePostPopup";
 
 
 
@@ -23,7 +24,8 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
-      <LeftHome user={user} />
+      <CreatePostPopup user={user} />
+      < LeftHome user={user} />
       <div className="home_middle">
         <Stories />
         {user.verified === false && <SendVerification user={user} />}

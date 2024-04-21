@@ -30,7 +30,6 @@ const Reset = () => {
         navigate("/login");
     };
 
-    console.log(userInfos);
 
     return (
         <div className="reset">
@@ -55,9 +54,9 @@ const Reset = () => {
             </div>
             <div className="reset_wrap">
                 {visible === 0 && <SearchAccount email={email} setEmail={setEmail} error={error} setError={setError} setLoading={setLoading} setUserInfos={setUserInfos} setVisible={setVisible} />}
-                {visible === 1 && userInfos && <SendEmail userInfos={userInfos} />}
-                {visible === 2 && <CodeVerification user={user} code={code} setCode={setCode} error={error} />}
-                {visible === 3 && <ChangePassword passwod={passwod} conf_password={conf_password} setPassword={setPassword} setConf_password={setConf_password} />}
+                {visible === 1 && userInfos && <SendEmail email={email} userInfos={userInfos} error={error} setError={setError} setLoading={setLoading} setUserInfos={setUserInfos} setVisible={setVisible} />}
+                {visible === 2 && <CodeVerification user={user} code={code} setCode={setCode} error={error} setError={setError} loading={loading} setLoading={setLoading} setVisible={setVisible} userInfos={userInfos} />}
+                {visible === 3 && <ChangePassword passwod={passwod} conf_password={conf_password} setPassword={setPassword} setConf_password={setConf_password} error={error} setError={setError} loading={loading} setLoading={setLoading} setVisible={setVisible} userInfos={userInfos} />}
             </div>
             <Footer />
         </div >
