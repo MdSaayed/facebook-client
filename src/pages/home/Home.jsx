@@ -15,6 +15,7 @@ import CreatePostPopup from "../../components/createPostPopup/CreatePostPopup";
 const Home = () => {
   const [visible, setVisible] = useState(true);
   const { user } = useSelector((state) => ({ ...state }));
+  const [showPostBox, setShowPostbox] = useState(false);
 
   const el = useRef(null);
   useClickOutside(el, () => {
@@ -24,12 +25,12 @@ const Home = () => {
   return (
     <div className="home">
       <Header />
-      <CreatePostPopup user={user} />
+      {showPostBox && <CreatePostPopup user={user} setShowPostbox={setShowPostbox} />}
       < LeftHome user={user} />
       <div className="home_middle">
         <Stories />
         {user.verified === false && <SendVerification user={user} />}
-        <CreatePost user={user} />
+        <CreatePost user={user} setShowPostbox={setShowPostbox} />
       </div >
       < RightHome user={user} />
     </div>

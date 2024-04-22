@@ -10,7 +10,7 @@ const AddToYourPost = ({ setShowPrev }) => {
         <div className="addtoyourpost">
             <div className="addto_text">Add to your post</div>
             <div className="post_header_right hover1">
-                <img src={photo} alt="" onClick={() => setShowPrev(true)} />  </div>
+                <img src={photo} alt="" onClick={() => { setShowPrev(true) }} />  </div>
             <div className="post_header_right hover1">
                 <img src={tag} alt="" />
             </div>

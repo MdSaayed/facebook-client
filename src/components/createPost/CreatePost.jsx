@@ -1,11 +1,11 @@
 import "./style.css";
 
-const CreatePost = ({ user }) => {
+const CreatePost = ({ user, setShowPostbox }) => {
     return (
         <div className="createPost">
             <div className="createPost_header">
                 <img src={user?.picture} alt="" />
-                <div className="open_post hover2">
+                <div className="open_post hover2" onClick={() => setShowPostbox(true)}>
                     What's on your mind, {user?.first_name}
                 </div>
             </div>
