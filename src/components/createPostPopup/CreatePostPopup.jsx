@@ -62,12 +62,15 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
                 formData.append("file", image);
             });
             const response = await uploadImages(formData, path, user.token);
-            console.log(response);
-            await createPost(null, null, text, response, user.id, user.token);
+            const res = await createPost(null, null, text, response, user.id, user.token);
             setLoading(false);
-            setText("");
-            setImages("");
-            setShowPostbox(false);
+            if (res == "ok") {
+                setText("");
+                setImages("");
+                setShowPostbox(false);
+            } else {
+                setError(res);
+            }
         } else if (text) {
             setLoading(true);
             const response = await createPost(
@@ -119,7 +122,7 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
 
                     <EmojiPickerBackground text={text} setText={setText} user={user} background={background} setBackground={setBackground} />
                 </> : <>
-                    <ImagePreview setShowPrev={setShowPrev} text={text} setText={setText} user={user} images={images} setImages={setImages} />
+                    <ImagePreview setShowPrev={setShowPrev} text={text} setText={setText} user={user} images={images} setImages={setImages} setError={setError} />
                 </>}
                 <AddToYourPost setShowPrev={setShowPrev} />
                 < button className="post_submit" onClick={() => postSubmit()} disabled={loading}>

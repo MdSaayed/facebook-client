@@ -5,13 +5,21 @@ import addPhoto from "../../../public/images/addPhoto.png";
 import phone from "../../../public/images/phone.png";
 import { MdEdit } from "react-icons/md";
 
-const ImagePreview = ({ text, setText, user, images, setImages, setShowPrev }) => {
+const ImagePreview = ({ text, setText, user, images, setImages, setShowPrev, setError }) => {
     const imageInputRef = useRef(null);
 
     // handle images
     const handleImages = (e) => {
         let files = Array.from(e.target.files);
         files.forEach((img) => {
+            if (img.type !== "image/jpeg" && img.type !== "image/png" && img.type !== "image/webp" && img.type !== "image/gif" && img.type !== "image/jpg") {
+                setError(`${img.name} format is unsupported! Only jpeg, Png, Webp, Gif are allowed.`);
+                return;
+            } else if (img.size > 1024 * 1024 * 10) {
+                setError(`${img.name} Size is too large max 10mb allowed.`);
+                files = files.filter((item => item.name !== imageInputRef.ane));
+                return;
+            }
             const reader = new FileReader();
             reader.readAsDataURL(img);
             reader.onload = (readerEvent) => {
@@ -20,11 +28,12 @@ const ImagePreview = ({ text, setText, user, images, setImages, setShowPrev }) =
         });
     };
 
+
     return (
         <div className="overflow_a scrollbar">
             <EmojiPickerBackground text={text} setText={setText} user={user} type2 />
             <div className="add_pics_wrap">
-                <input type="file" multiple hidden name="" id="" ref={imageInputRef} onChange={handleImages} />
+                <input type="file" multiple hidden name="" id="" ref={imageInputRef} accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImages} />
                 {images && images.length ? (
                     <div className="add_pics_inside1 p0">
                         <div className="preview_actions">
