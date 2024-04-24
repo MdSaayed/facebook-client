@@ -29,7 +29,7 @@ const Posts = ({ user }) => {
     return (
         <div className="posts">
             {
-                posts.map((post) => <Post key={post._id} post={post} />)
+                posts.map((post) => <Post key={post._id} post={post} user={user} />)
             }
         </div >
     );

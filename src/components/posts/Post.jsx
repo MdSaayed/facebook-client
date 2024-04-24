@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import Public from '../../../public/icons/svg/Public';
 import Dott from '../../../public/icons/svg/dott';
 import './style.css';
+import { AiOutlineLike } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa6";
+import { PiShareFatThin } from "react-icons/pi";
+import ReactPopup from './ReactPopup';
+import CreateComment from './CreateComment';
 
-const Post = ({ post }) => {
+
+
+
+const Post = ({ post, user }) => {
+    const [visible, setVisible] = useState(false);
+
+
+
     return (
         <div className='post'>
             <div className="post_header">
@@ -60,6 +72,36 @@ const Post = ({ post }) => {
                     )}
                 </>
             )}
+            <div className="post_infos">
+                <div className="reacts_count">
+                    <div className="reacts_count_imgs"></div>
+                    <div className="reacts_count_num"></div>
+                </div>
+                <div className="to_right">
+                    <div className="comments_count">13 comments</div>
+                    <div className="share_count">1 share</div>
+                </div>
+            </div>
+            <div className="post_actions">
+                <ReactPopup visible={visible} setVisible={setVisible} />
+                <div className="post_aciton hover1" onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)} onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)}>
+                    <AiOutlineLike style={{ fontSize: "20px" }} />
+                    <span>Like</span>
+                </div>
+                <div className="post_aciton hover1">
+                    <FaRegComment style={{ fontSize: "20px" }} />
+                    <span>Comment</span>
+                </div>
+                <div className="post_aciton hover1">
+                    <PiShareFatThin style={{ fontSize: "20px" }} />
+                    <span>Share</span>
+                </div>
+            </div>
+            <div className="comments_wrap">
+                <div className="comments_order">
+                    <CreateComment user={user} />
+                </div>
+            </div>
         </div>
     );
 };
