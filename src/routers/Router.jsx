@@ -7,6 +7,7 @@ import Private from "../routers/Private";
 import Activated from "../pages/home/active";
 import Reset from "../pages/reset/reset";
 
+
 const router = createBrowserRouter([
   {
     path: "/",

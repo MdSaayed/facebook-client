@@ -35,7 +35,7 @@ const CreateComment = ({ user }) => {
 
     const handleImage = (e) => {
         let file = e.target.files[0];
-        if (file.type !== `image/jpeg` && file.type !== `image/jpeg` && file.type !== `image/jpeg` && file.type !== `image/jpeg`) {
+        if (file.type !== `image/jpeg` && file.type !== `image/png` && file.type !== `image/webp` && file.type !== `image/gif`) {
             setError(`${file.name} format is not supported.`);
             return;
         } else if (file.size > 1024 * 1024 * 5) {

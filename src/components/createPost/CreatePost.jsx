@@ -1,6 +1,6 @@
 import "./style.css";
 
-const CreatePost = ({ user, setShowPostbox }) => {
+const CreatePost = ({ user, setShowPostbox, profile }) => {
     return (
         <div className="createPost">
             <div className="createPost_header">
@@ -19,12 +19,21 @@ const CreatePost = ({ user, setShowPostbox }) => {
                     <img src="./images/photo.png" alt="" />
                     Photo/Video
                 </div>
-                <div className="createPost_icon hover1">
-                    <img src="./images/felling.png" alt="" />
-                    Feeling/Activity
-                </div>
+                {
+                    profile ? (
+                        <div className="createPost_icon hover1">
+                            <i style={{ color: "#1876f2", fontSize: "20px" }} className="fas fa-flag"></i>
+                            Life Event
+                        </div>
+                    ) : (
+                        <div className="createPost_icon hover1">
+                            <img src="./images/felling.png" alt="" />
+                            Feeling/Activity
+                        </div>
+                    )
+                }
             </div>
-        </div>
+        </div >
     );
 };
 

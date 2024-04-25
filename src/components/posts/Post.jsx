@@ -9,13 +9,16 @@ import { FaRegComment } from "react-icons/fa6";
 import { PiShareFatThin } from "react-icons/pi";
 import ReactPopup from './ReactPopup';
 import CreateComment from './CreateComment';
+import PostMenu from './PostMenu';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 
 
 
 const Post = ({ post, user }) => {
     const [visible, setVisible] = useState(false);
-
+    const [showMenu, setShowMenu] = useState(false);
 
 
     return (
@@ -38,8 +41,9 @@ const Post = ({ post, user }) => {
                         </div>
                     </div>
                 </Link>
-                <div className="post_header_right hover1">
+                <div className="post_header_right hover1" onClick={() => setShowMenu((prev) => !prev)} >
                     <Dott color="#828387" size="18px" />
+
                 </div>
             </div>
             {post.background ? (
@@ -102,6 +106,12 @@ const Post = ({ post, user }) => {
                     <CreateComment user={user} />
                 </div>
             </div>
+            {
+                showMenu && <>
+                    < PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} />
+                </>
+            }
+
         </div>
     );
 };

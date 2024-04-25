@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Header from "../../components/header/Header";
 import useClickOutside from "../../helpers/useClickOutside";
 import LeftHome from "../../components/home/left/Left";
@@ -11,10 +11,11 @@ import SendVerification from "../../components/home/sendVerification/SendVerific
 import CreatePostPopup from "../../components/createPostPopup/CreatePostPopup";
 import Posts from "../../components/posts/Posts";
 
+
+
 const Home = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [showPostBox, setShowPostbox] = useState(false);
-
   const el = useRef(null);
   useClickOutside(el, () => {
     setShowPostbox(false);
