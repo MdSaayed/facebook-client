@@ -16,13 +16,13 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 
 
-const Post = ({ post, user }) => {
+const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
 
 
     return (
-        <div className='post'>
+        <div className='post' style={{ width: `${profile && "100%"}` }}>
             <div className="post_header">
                 <Link to={`/profile/${post.user.username}`} className="post_header_left">
                     <img src={post?.user?.picture} alt={post?.user?.username} />

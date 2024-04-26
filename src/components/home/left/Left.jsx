@@ -12,13 +12,15 @@ const LeftHome = ({ user }) => {
 
     return (
         <div className="left_home scrollbar">
-            <Link to={"/profile"} className="left_link hover1">
-                <img src={user.picture} alt="" />
+            <Link to={`/profile/${user.username}`} className="left_link hover1">
+                < img src={user.picture} alt="" />
                 <span>{user.first_name} {user.last_name}</span>
             </Link>
-            {left?.slice(0, 8).map((link, idx) => (
-                <LeftLink key={idx} img={link.img} text={link.text} notification={link.notification} />
-            ))}
+            {
+                left?.slice(0, 8).map((link, idx) => (
+                    <LeftLink key={idx} img={link.img} text={link.text} notification={link.notification} />
+                ))
+            }
             {
                 !visible && (
                     <div className="left_link hover1" onClick={() => { setVisible(true) }} >

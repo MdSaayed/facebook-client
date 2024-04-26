@@ -20,7 +20,7 @@ const GridPosts = () => {
                 </div>
             </div>
             <div className="create_splitter"></div>
-            <div className="createPost_body grid2" style={{ gridTemplateColumns: "repeat(2, fr)" }}>
+            <div className=" createPost_body grid2"  >
                 <div className="view_type active">
                     <i className="fas fa-list filter_blue"></i>
                     List view
@@ -30,6 +30,7 @@ const GridPosts = () => {
                     Grid view
                 </div>
             </div>
+
         </div >
     );
 };
