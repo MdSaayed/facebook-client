@@ -26,7 +26,7 @@ export default function ProfilePicture({ username, pRef, setShow, photos }) {
     ) {
       setError(`${file.name} format is not supported.`);
       return;
-    } else if (file.size > 1024 * 1024 * 5) {
+    } else if (file.size > 1024 * 1024 * 15) {
       setError(`${file.name} is too large max 5mb allowed.`);
       return;
     }

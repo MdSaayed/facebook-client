@@ -86,7 +86,6 @@ export default function UpdateProfilePicture({
         if (new_post === "ok") {
           setLoading(false);
           setImage("");
-          setShow(false);
           pRef.current.style.backgroundImage = `url(${res[0].url})`;
           Cookies.set(
             "user",
@@ -99,6 +98,7 @@ export default function UpdateProfilePicture({
             type: "UPDATEPICTURE",
             payload: res[0].url,
           });
+          setShow(false);
         } else {
           setLoading(false);
 

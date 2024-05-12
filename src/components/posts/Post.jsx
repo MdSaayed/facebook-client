@@ -32,8 +32,8 @@ const Post = ({ post, user, profile }) => {
                             <div className="updated_p">
                                 {post.type === "profilePicture" &&
                                     `upload ${post.user.gender === "male" ? "his" : "her"} profile picture`}
-                                {post.type === "cover" &&
-                                    `updated  ${post.user.gender === "male" ? "his" : "her"} profile picture`}
+                                {post.type === "coverPicture" &&
+                                    `updated  ${post.user.gender === "male" ? "his" : "her"} cover picture`}
                             </div>
                         </div>
                         <div className="post_profile_privacy_date">
@@ -87,7 +87,9 @@ const Post = ({ post, user, profile }) => {
                 </div>
                 <img src={post.images[0].url} alt="" className="post_updated_picture" />
             </div>) : (
-                <div className="post_cover_wrap"></div>
+                <div className="post_cover_wrap">
+                    <img src={post.images[0].url} alt="" />
+                </div>
             )
             }
             <div className="post_infos">

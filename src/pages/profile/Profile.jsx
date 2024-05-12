@@ -110,7 +110,7 @@ const Profile = () => {
             <Header page="profile" />
             <div className="profile_top" ref={profileTop}>
                 <div className="profile_container">
-                    <Cover cover={profile.cover} visitor={visitor} />
+                    <Cover cover={profile.cover} visitor={visitor} photos={photos.resources} />
                     <ProfielPictureInfos profile={profile} visitor={visitor} photos={photos.resources} othername={othername} />
                     <ProfileMenu />
                 </div>

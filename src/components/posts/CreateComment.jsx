@@ -38,7 +38,7 @@ const CreateComment = ({ user }) => {
         if (file.type !== `image/jpeg` && file.type !== `image/png` && file.type !== `image/webp` && file.type !== `image/gif`) {
             setError(`${file.name} format is not supported.`);
             return;
-        } else if (file.size > 1024 * 1024 * 5) {
+        } else if (file.size > 1024 * 1024 * 15) {
             setError(`${file.name} is too large max 5mb allowed.`);
             return;
         }

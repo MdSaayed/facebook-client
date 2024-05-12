@@ -15,7 +15,7 @@ const ImagePreview = ({ text, setText, user, images, setImages, setShowPrev, set
             if (img.type !== "image/jpeg" && img.type !== "image/png" && img.type !== "image/webp" && img.type !== "image/gif" && img.type !== "image/jpg") {
                 setError(`${img.name} format is unsupported! Only jpeg, Png, Webp, Gif are allowed.`);
                 return;
-            } else if (img.size > 1024 * 1024 * 10) {
+            } else if (img.size > 1024 * 1024 * 15) {
                 setError(`${img.name} Size is too large max 10mb allowed.`);
                 files = files.filter((item => item.name !== imageInputRef.ane));
                 return;
