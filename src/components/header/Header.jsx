@@ -18,9 +18,9 @@ import AllMenu from "./AllMenu";
 import useClickOutside from "../../helpers/useClickOutside";
 import UserMenu from "./userMenu/UserMenu";
 
-const Header = () => {
+const Header = ({ page }) => {
   const { user } = useSelector((user) => ({ ...user }));
-  const color = "#65676b";
+  const color = "#0866ff";
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showAllMenu, setShowAllMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -36,6 +36,7 @@ const Header = () => {
     setShowAllMenu(false);
   });
 
+  console.log(page);
 
   return (
     <header>
@@ -62,25 +63,25 @@ const Header = () => {
       )}
 
       <div className="header_middle">
-        <Link className="middle_icon active">
-          <ActiveHomeIcon color={color} />
+        <Link className={`middle_icon ${page === "home" ? 'active' : 'hover1'}`} to="/">
+          <ActiveHomeIcon color={page === "home" ? color : "#65676b"} />
         </Link>
         <Link className="middle_icon hover1">
-          <Watch color={color} />
+          <Watch color={page === "video" ? color : "#65676b"} />
           <div className="middle_notification">9+</div>
         </Link>
         <Link className="middle_icon hover1">
-          <FriendsIcon color={color} />
+          <FriendsIcon color={page === "friends" ? color : "#65676b"} />
         </Link>
         <Link className="middle_icon hover1">
-          <Market color={color} />
+          <Market color={page === "market" ? color : "#65676b"} />
         </Link>
         <Link className="middle_icon hover1">
-          <Gaming color={color} />
+          <Gaming color={page === "game" ? color : "#65676b"} />
         </Link>
       </div>
       <div className="header_right">
-        <Link className="profile_link hover1">
+        <Link to={`/profile/${user.username}`} className={`profile_link hover1 ${page === "profile" ? "active_link" : ""}`}>
           <img src={user?.picture} alt="" />
           <span>{user?.first_name}</span>
         </Link>

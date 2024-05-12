@@ -1,16 +1,27 @@
-export default function ProfielPictureInfos({ profile, visitor }) {
+import { useRef, useState } from "react";
+import ProfilePicture from "../../components/profielPicture/ProfilePicture";
+
+export default function ProfielPictureInfos({ profile, visitor, photos, othername, }) {
+  const [show, setShow] = useState(false);
+  const pRef = useRef(null);
+
+
+
+
   return (
     <div className="profile_img_wrap">
+      {show && <ProfilePicture setShow={setShow} pRef={pRef} photos={photos} />}
       <div className="profile_w_left">
         <div className="profile_w_img">
           <div
             className="profile_w_bg"
+            ref={pRef}
             style={{
               backgroundSize: "cover",
-              backgroundImage: `url(${profile.picture})`,
+              backgroundImage: `url(${profile?.picture})`,
             }}
           ></div>
-          {!visitor && <div className="profile_circle hover1">
+          {!visitor && <div className="profile_circle hover1" onClick={() => setShow(true)}>
             <i className="fas fa-camera"></i>
           </div>}
         </div>

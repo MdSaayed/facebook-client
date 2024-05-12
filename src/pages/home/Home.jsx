@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div className="home" style={{ height: "100vh" }}>
-      <Header />
+      <Header page="home" />
       {showPostBox && <CreatePostPopup user={user} setShowPostbox={setShowPostbox} />}
       <LeftHome user={user} />
       <div className="home_middle">
@@ -33,7 +33,7 @@ const Home = () => {
         <Posts user={user} />
       </div>
       <RightHome user={user} />
-    </div>
+    </div >
   );
 };
 

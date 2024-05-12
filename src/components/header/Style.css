@@ -685,7 +685,10 @@ background:var(--light-blue-color);
 fill:var(--blue-color)
 }
 /* active menu */
-
+.active_link{
+background: var(--light-blue-color);
+color: var(--blue-color);
+}
 
 
 
