@@ -19,7 +19,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
-    console.log(post);
 
     return (
         <div className='post' style={{ width: `${profile && "100%"}` }}>

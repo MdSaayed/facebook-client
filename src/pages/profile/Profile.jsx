@@ -16,6 +16,7 @@ import Photos from "./Photos";
 import Friends from "./Friends";
 import { useMediaQuery } from "react-responsive";
 import ProfielPictureInfos from "./ProfielPictureInfos";
+import Intro from "../../components/intro/Intro";
 
 const Profile = () => {
     const [showPostBox, setShowPostbox] = useState(false);
@@ -121,7 +122,8 @@ const Profile = () => {
                         <PpYouMayKnow />
                         <div className={`profile_grid ${check && scrollHeight >= height && leftHeight > 1000 ? "scrollFixed showLess" : check && scrollHeight >= height && leftHeight < 1000 && "scrollFixed showMore"}`}>
                             <div className="profile_left" ref={leftSide}>
-                                <Photos username={userName} token={user.token} photos={photos} />
+                                <Intro detailss={profile.details} visitor={visitor} />
+                                < Photos username={userName} token={user.token} photos={photos} />
                                 <Friends friends={profile.friends} />
                                 <div className="relative_fb_copyright">
                                     <Link to={"/"}>Privacy</Link>
