@@ -122,7 +122,11 @@ const Profile = () => {
                         <PpYouMayKnow />
                         <div className={`profile_grid ${check && scrollHeight >= height && leftHeight > 1000 ? "scrollFixed showLess" : check && scrollHeight >= height && leftHeight < 1000 && "scrollFixed showMore"}`}>
                             <div className="profile_left" ref={leftSide}>
-                                <Intro detailss={profile.details} visitor={visitor} />
+                                <Intro
+                                    detailss={profile.details}
+                                    visitor={visitor}
+                                    setOthername={setOthername}
+                                />
                                 < Photos username={userName} token={user.token} photos={photos} />
                                 <Friends friends={profile.friends} />
                                 <div className="relative_fb_copyright">

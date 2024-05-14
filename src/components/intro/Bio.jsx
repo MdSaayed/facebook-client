@@ -1,16 +1,39 @@
 import Public from "../../../public/icons/svg/Public";
 
-const Bio = ({ infos, handleBioChange, max, setShowBio, updateDetails }) => {
+const Bio = ({ infos, handleChange, max, setShowBio, updateDetails, placeholder, name, detail, setShow, rel }) => {
     return (
         <div className="add_bio_wrap">
-            <textarea placeholder="Add bio" name="bio" value={infos?.bio} maxLength={"100"} className=" textarea_blue details_input" onChange={handleBioChange}></textarea><div className="remaining">{max} characters remaining</div>
+            {
+                rel ? (
+                    <select
+                        className={"select_rel"}
+                        name={name}
+                        value={infos.relationship}
+                        onChange={handleChange}>
+                        <option value="Single">Single</option>
+                        <option value="In a relationship">In a relationship</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                ) : (
+                    <textarea
+                        placeholder={placeholder}
+                        name={name}
+                        value={infos?.[name]}
+                        maxLength={detail ? 25 : 100}
+                        className=" textarea_blue details_input"
+                        onChange={handleChange}>
+                    </textarea>
+                )
+            }
+            {!detail && <div className="remaining">{max} characters remaining</div>}
             <div className="flex">
                 <div className="flex flex_left">
                     <Public color="#828387" size="15px" />Public
                 </div>
                 <div className="flex flex_right">
-                    <button className="gray_btn" onClick={() => setShowBio(false)}>Cancel</button>
-                    <button className="blue_btn" onClick={() => updateDetails()}>Save</button>
+                    <button className="gray_btn" onClick={() => !detail ? setShowBio(false) : setShow(false)}>Cancel</button>
+                    <button className="blue_btn" onClick={() => { updateDetails(); setShow(false) }}>Save</button>
                 </div>
             </div>
         </div >
