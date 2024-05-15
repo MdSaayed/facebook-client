@@ -664,10 +664,14 @@ transform: translateX(-32%);
 display: none;
 }
 .mmenu{
-width: 340px;
+width: 290px;
 }
 .all_menu{
-left: -9rem;
+width: 310px;
+left: -6.8rem;
+}
+.search_area{
+width: 310px;
 }
 .header_middle{
 transform: translateX(-25%);

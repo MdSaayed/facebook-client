@@ -79,7 +79,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.job && details?.workplace && (
                     <div className="info_profile">
-                        <img src="../../../icons/job.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/job.png" alt="" />
                         works as {details.job} at <b>{details.workplace}</b>
                     </div>
                 )
@@ -87,7 +87,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.job && !details?.workplace && (
                     <div className="info_profile">
-                        <img src="../../../icons/job.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/job.png" alt="" />
                         works as {details.job}
                     </div>
                 )
@@ -95,7 +95,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.workplace && !details?.job && (
                     <div className="info_profile">
-                        <img src="../../../icons/job.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/job.png" alt="" />
                         works at {details.workplace}
                     </div>
                 )
@@ -103,14 +103,14 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.relationship && (
                     <div className="info_profile">
-                        <img style={{ width: "20px" }} src="../../../icons/relationship.png" alt="" />  {details.relationship}
+                        <img style={{ width: "17px" }} src="../../../icons/relationship.png" alt="" />  {details.relationship}
                     </div>
                 )
             }
             {
                 details?.college && (
                     <div className="info_profile">
-                        <img src="../../../icons/studies.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/studies.png" alt="" />
                         studied at {details.college}
                     </div>
                 )
@@ -118,7 +118,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.highSchool && (
                     <div className="info_profile">
-                        <img src="../../../icons/studies.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/studies.png" alt="" />
                         studied at {details.highSchool}
                     </div>
                 )
@@ -126,7 +126,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.currentCity && (
                     <div className="info_profile">
-                        <img src="../../../icons/home.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/home.png" alt="" />
                         Lives in {details.currentCity}
                     </div>
                 )
@@ -134,7 +134,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.hometown && (
                     <div className="info_profile">
-                        <img src="../../../icons/home.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/home.png" alt="" />
                         From {details.hometown}
                     </div>
                 )
@@ -142,7 +142,7 @@ const Intro = ({ detailss, visitor, setOthername }) => {
             {
                 details?.instagram && (
                     <div className="info_profile">
-                        <img src="../../../icons/instagram.png" alt="" />
+                        <img style={{ width: "17px" }} src="../../../icons/instagram.png" alt="" />
                         <a href={`https://www.instagram.com/${details.instagram}`} target="_blank">
                             {details.instagram}
                         </a>

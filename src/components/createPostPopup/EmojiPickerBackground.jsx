@@ -2,6 +2,7 @@ import Picker from "emoji-picker-react";
 import { BsEmojiSmile } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
+import { useMediaQuery } from "react-responsive";
 
 
 
@@ -52,6 +53,10 @@ const EmojiPickerBackground = ({ text, setText, user, type2, setBackground, back
         bgRef.current.classList.remove("bgHandler");
     }
 
+    const sm = useMediaQuery({
+        query: "(max-width:550px)",
+    })
+
     return (
         <div className={
             type2 ? 'images_input' : ""
@@ -63,7 +68,7 @@ const EmojiPickerBackground = ({ text, setText, user, type2, setBackground, back
                     value={text}
                     placeholder={`What's on your mind, ${user.first_name}`
                     }
-                    className={`post_input ${type2 ? "input2" : ""}`}
+                    className={`post_input ${type2 ? "input2" : ""} ${sm && !background && "l0"}`}
                     onChange={(e) => setText(e.target.value)}
                     style={{ paddingTop: `${background ? Math.abs(textRef.current.value.length * 0.05 - 32) : "0"}%` }}
                 />
