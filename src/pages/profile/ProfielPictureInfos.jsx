@@ -28,7 +28,7 @@ export default function ProfielPictureInfos({ profile, visitor, photos, othernam
         </div>
         <div className="profile_w_col">
           <div className="profile_name">
-            {profile.first_name} {profile.last_name}
+            {profile?.first_name} {profile?.last_name}
             <div className="othername">{othername && `(${othername})`}</div>
           </div>
           <div className="profile_friend_count"></div>
@@ -36,7 +36,7 @@ export default function ProfielPictureInfos({ profile, visitor, photos, othernam
         </div>
       </div>
       {
-        visitor ? <Friendship /> : (
+        visitor ? <Friendship friendship={profile?.friendship} /> : (
           <div className="profile_w_right">
             <div className="blue_btn">
               <img src="../../../icons/plus.png" alt="" className="invert" />
