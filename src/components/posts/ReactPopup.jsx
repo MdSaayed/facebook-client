@@ -18,8 +18,8 @@ const ReactPopup = ({ visible, setVisible }) => {
             image: "../../../reacts/wow.gif",
         },
         {
-            name: "wow",
-            image: "../../../reacts/wow.gif",
+            name: "sad",
+            image: "../../../reacts/sad.gif",
         },
         {
             name: "angry",

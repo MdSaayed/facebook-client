@@ -508,6 +508,9 @@
   .bottom_container {
     padding: 5px;
   }
+.friendship{
+transform: translateY(-4rem);
+}
 }
 
 @media (max-width: 650px) {
@@ -538,4 +541,7 @@
 
 .showMore .profile_left {
   top: 54px;
+}
+.friendship{
+z-index: 9;
 }

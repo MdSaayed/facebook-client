@@ -5,7 +5,7 @@ export const uploadImages = async (formData, path, token) => {
         const { data } = await axios.post(`http://localhost:8000/uploadImages`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                "content-type": "multipart/form-data",   
+                "content-type": "multipart/form-data",
             }
         });
         return data;
