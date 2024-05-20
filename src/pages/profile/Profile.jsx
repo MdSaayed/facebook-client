@@ -107,8 +107,6 @@ const Profile = () => {
     };
 
 
-    console.log(profile);
-
     return (
         <div className="profile">
             <Header page="profile" />

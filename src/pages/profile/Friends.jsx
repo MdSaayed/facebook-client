@@ -14,7 +14,7 @@ const Friends = ({ friends }) => {
                 {friends?.length === 0
                     ? ""
                     : friends?.length === 1
-                        ? "1 Photo"
+                        ? "1 Friend"
                         : `${friends?.length} friends`}
             </div>
             {

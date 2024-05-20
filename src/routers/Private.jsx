@@ -14,3 +14,4 @@ const Private = ({ children }) => {
 };
 
 export default Private;
+

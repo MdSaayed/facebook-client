@@ -511,6 +511,9 @@
 .friendship{
 transform: translateY(-4rem);
 }
+.othername{
+transform: translateY(-10px);
+}
 }
 
 @media (max-width: 650px) {
@@ -522,6 +525,11 @@ transform: translateY(-4rem);
 @media (max-width: 510px) {
   .udpate_cover_wrapper {
     bottom: 3rem;
+  }
+}
+@media (max-width: 405px) {
+  .friendship {
+    flex-direction: column;
   }
 }
 
@@ -549,5 +557,11 @@ align-items: center;
 gap: 10px;
 }
 .friendship .blue_btn{
-height: 35px;
+height: 34px;
+}
+
+@media (min-width:900px){
+.friendship{
+transform: translateX(-2rem);
+}
 }
