@@ -36,7 +36,7 @@ export default function ProfielPictureInfos({ profile, visitor, photos, othernam
         </div>
       </div>
       {
-        visitor ? <Friendship friendship={profile?.friendship} /> : (
+        visitor ? <Friendship friendshipp={profile?.friendship} profileid={profile._id} /> : (
           <div className="profile_w_right">
             <div className="blue_btn">
               <img src="../../../icons/plus.png" alt="" className="invert" />
