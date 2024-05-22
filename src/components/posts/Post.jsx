@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import Public from '../../../public/icons/svg/Public';
@@ -11,6 +11,7 @@ import ReactPopup from './ReactPopup';
 import CreateComment from './CreateComment';
 import PostMenu from './PostMenu';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { getReacts, reactPost } from '../../functions/post';
 
 
 
@@ -19,6 +20,31 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [reacts, setReacts] = useState();
+    const [check, setCheck] = useState();
+    const [totalReact, setTotalReact] = useState(0);
+
+    useEffect(() => {
+        getPostReacts();
+    }, [post]);
+
+    // get reacts
+    const getPostReacts = async () => {
+        const res = await getReacts(post._id, user?.token);
+        setReacts(res?.reacts);
+        setCheck(res.check);
+        setTotalReact(res.total);
+    }
+
+    const reacthandler = async (type) => {
+        await reactPost(post?._id, type, user?.token);
+        if (check == type) {
+            setCheck();
+        } else {
+            setCheck(type);
+        }
+    }
+
 
     return (
         <div className='post' style={{ width: `${profile && "100%"}` }}>
@@ -93,8 +119,17 @@ const Post = ({ post, user, profile }) => {
             }
             <div className="post_infos">
                 <div className="reacts_count">
-                    <div className="reacts_count_imgs"></div>
-                    <div className="reacts_count_num"></div>
+                    <div className="reacts_count_imgs">
+                        {reacts && reacts?.slice(0,3).map((react, idx) => (
+                            react?.count ? (
+                                <img  src={`../../../reacts/${react?.react}.svg`}
+                                    key={idx}
+                                    alt={react?.react}
+                                />
+                            ):""
+                        ))}
+                    </div>
+                    <div className="reacts_count_num">{ totalReact> 0 && totalReact}</div>
                 </div>
                 <div className="to_right">
                     <div className="comments_count">13 comments</div>
@@ -102,10 +137,24 @@ const Post = ({ post, user, profile }) => {
                 </div>
             </div>
             <div className="post_actions">
-                <ReactPopup visible={visible} setVisible={setVisible} />
-                <div className="post_aciton hover1" onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)} onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)}>
-                    <AiOutlineLike style={{ fontSize: "20px" }} />
-                    <span>Like</span>
+                <ReactPopup visible={visible} setVisible={setVisible} reacthandler={reacthandler} />
+                <div className="post_aciton hover1" onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)} onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)} onClick={() => reacthandler(check ? check : 'like')}>
+                    {
+                        check ? <img src={`../../../reacts/${check}.svg`} style={{ width: '18px' }} className='small_react' /> : <>
+                            <AiOutlineLike style={{ fontSize: "20px" }} />
+                        </>
+                    }
+                    <span style={{
+                        color: check === "like" ? '#4267b2'
+                            : check === 'love' ? '#f63459'
+                                : check === 'haha' ? '#f7b125'
+                                    : check === 'wow' ? '#f7b125'
+                                        : check === 'sad' ? '#f7b125'
+                                            : check === "angry" ? '#e4605a'
+                                                : ''
+                    }}>
+                        {check ? check : "Like"}
+                    </span>
                 </div>
                 <div className="post_aciton hover1">
                     <FaRegComment style={{ fontSize: "20px" }} />

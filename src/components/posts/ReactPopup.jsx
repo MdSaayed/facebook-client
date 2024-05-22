@@ -1,5 +1,9 @@
 
-const ReactPopup = ({ visible, setVisible }) => {
+import { useSelector } from "react-redux";
+import { reactPost } from "../../functions/post";
+
+const ReactPopup = ({ visible, setVisible, reacthandler}) => {
+    const { user } = useSelector((state) => ({...state }));
     const reactsArray = [
         {
             name: "like",
@@ -27,13 +31,15 @@ const ReactPopup = ({ visible, setVisible }) => {
         },
     ];
 
+   
+
 
     return (
         <>
             {visible && (
                 < div className="reacts_popup" onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)} onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)}>
                     {reactsArray.map((react, idx) => (
-                        <div className="react" key={idx}>
+                        <div className="react" key={idx} onClick={() => reacthandler(react.name)}>
                             <img src={react.image} alt={react.name} />
                         </div>
                     ))}

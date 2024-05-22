@@ -35,11 +35,11 @@ export default function ProfielPictureInfos({ profile, visitor, photos, othernam
           </div>
           <div className="profile_friend_count">
             {
-              friendsCount && (
+              friendsCount ? (
                 <div className="profile_card_count">
                   {friendsCount === 0 ? "" : `${friendsCount} Friend${friendsCount > 1 ? "s" : ""}`}
                 </div>
-              )
+              ):""
             }
           </div>
           <div className="profile_friend_imgs">
