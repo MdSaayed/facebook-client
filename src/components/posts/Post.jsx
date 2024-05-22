@@ -13,38 +13,55 @@ import PostMenu from './PostMenu';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { getReacts, reactPost } from '../../functions/post';
 
-
-
-
-
 const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
-    const [reacts, setReacts] = useState();
-    const [check, setCheck] = useState();
+    const [reacts, setReacts] = useState([]);
+    const [check, setCheck] = useState('');
     const [totalReact, setTotalReact] = useState(0);
 
     useEffect(() => {
         getPostReacts();
     }, [post]);
 
-    // get reacts
+    // Get reacts
     const getPostReacts = async () => {
         const res = await getReacts(post._id, user?.token);
         setReacts(res?.reacts);
         setCheck(res.check);
-        setTotalReact(res.total);
+        setTotalReact(res.reacts.reduce((total, react) => total + react.count, 0));
     }
 
+    // Handle react
     const reacthandler = async (type) => {
         await reactPost(post?._id, type, user?.token);
-        if (check == type) {
-            setCheck();
+
+        if (check === type) {
+            setCheck('');
+            const index = reacts.findIndex((x) => x.react === type);
+            if (index !== -1) {
+                const newReacts = [...reacts];
+                newReacts[index].count--;
+                setReacts(newReacts);
+                setTotalReact((prev) => prev - 1);
+            }
         } else {
+            const newReacts = [...reacts];
+            if (check) {
+                const oldReactIndex = newReacts.findIndex((x) => x.react === check);
+                if (oldReactIndex !== -1) {
+                    newReacts[oldReactIndex].count--;
+                }
+            }
+            const newReactIndex = newReacts.findIndex((x) => x.react === type);
+            if (newReactIndex !== -1) {
+                newReacts[newReactIndex].count++;
+            }
+            setReacts(newReacts);
             setCheck(type);
+            setTotalReact((prev) => prev + (check ? 0 : 1));
         }
     }
-
 
     return (
         <div className='post' style={{ width: `${profile && "100%"}` }}>
@@ -68,9 +85,8 @@ const Post = ({ post, user, profile }) => {
                         </div>
                     </div>
                 </Link>
-                <div className="post_header_right hover1" onClick={() => setShowMenu((prev) => !prev)} >
+                <div className="post_header_right hover1" onClick={() => setShowMenu((prev) => !prev)}>
                     <Dott color="#828387" size="18px" />
-
                 </div>
             </div>
 
@@ -115,33 +131,40 @@ const Post = ({ post, user, profile }) => {
                 <div className="post_cover_wrap">
                     <img src={post.images[0].url} alt="" />
                 </div>
-            )
-            }
+            )}
+
             <div className="post_infos">
                 <div className="reacts_count">
                     <div className="reacts_count_imgs">
-                        {reacts && reacts?.slice(0,3).map((react, idx) => (
-                            react?.count ? (
-                                <img  src={`../../../reacts/${react?.react}.svg`}
+                        {reacts && reacts.sort((a, b) => b.count - a.count).slice(0, 3).map((react, idx) => (
+                            react?.count > 0 && (
+                                <img
+                                    src={`../../../reacts/${react.react}.svg`}
                                     key={idx}
-                                    alt={react?.react}
+                                    alt={react.react}
                                 />
-                            ):""
+                            )
                         ))}
                     </div>
-                    <div className="reacts_count_num">{ totalReact> 0 && totalReact}</div>
+                    <div className="reacts_count_num">{totalReact > 0 && totalReact}</div>
                 </div>
                 <div className="to_right">
                     <div className="comments_count">13 comments</div>
                     <div className="share_count">1 share</div>
                 </div>
             </div>
+
             <div className="post_actions">
                 <ReactPopup visible={visible} setVisible={setVisible} reacthandler={reacthandler} />
-                <div className="post_aciton hover1" onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)} onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)} onClick={() => reacthandler(check ? check : 'like')}>
-                    {
-                        check ? <img src={`../../../reacts/${check}.svg`} style={{ width: '18px' }} className='small_react' /> : <>
-                            <AiOutlineLike style={{ fontSize: "20px" }} />
+                <div
+                    className="post_action hover1"
+                    onMouseOver={() => setTimeout(() => { setVisible(true) }, 500)}
+                    onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)}
+                    onClick={() => reacthandler(check ? check : 'like')}
+                >
+                   {
+                        check ? <img src={`../../../reacts/${check}.svg`} style={{ width: '18px' }} className='small_react' alt={check} /> : <>
+                            <AiOutlineLike style={{ fontSize: "18px" }} />
                         </>
                     }
                     <span style={{
@@ -156,27 +179,25 @@ const Post = ({ post, user, profile }) => {
                         {check ? check : "Like"}
                     </span>
                 </div>
-                <div className="post_aciton hover1">
+                <div className="post_action hover1">
                     <FaRegComment style={{ fontSize: "20px" }} />
                     <span>Comment</span>
                 </div>
-                <div className="post_aciton hover1">
+                <div className="post_action hover1">
                     <PiShareFatThin style={{ fontSize: "20px" }} />
                     <span>Share</span>
                 </div>
             </div>
+
             <div className="comments_wrap">
                 <div className="comments_order">
                     <CreateComment user={user} />
                 </div>
             </div>
             {
-                showMenu && <>
-                    < PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} />
-                </>
+                showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} />
             }
-
-        </div >
+        </div>
     );
 };
 
