@@ -12,17 +12,25 @@ import CreateComment from './CreateComment';
 import PostMenu from './PostMenu';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { getReacts, reactPost } from '../../functions/post';
+import Comment from './Comment';
 
 const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [reacts, setReacts] = useState([]);
     const [check, setCheck] = useState('');
+    const [comments, setComments] = useState([]);
     const [totalReact, setTotalReact] = useState(0);
+    const [count, setCount] = useState(1);
 
     useEffect(() => {
         getPostReacts();
     }, [post]);
+
+    useEffect(() => {
+        setComments(post?.comments );
+    }, [post]);
+
 
     // Get reacts
     const getPostReacts = async () => {
@@ -62,6 +70,12 @@ const Post = ({ post, user, profile }) => {
             setTotalReact((prev) => prev + (check ? 0 : 1));
         }
     }
+
+    // showMore
+    const showMore = () => {
+        setCount((prev) => prev + 3);
+    }
+
 
     return (
         <div className='post' style={{ width: `${profile && "100%"}` }}>
@@ -149,7 +163,7 @@ const Post = ({ post, user, profile }) => {
                     <div className="reacts_count_num">{totalReact > 0 && totalReact}</div>
                 </div>
                 <div className="to_right">
-                    <div className="comments_count">13 comments</div>
+                    <div className="comments_count">{comments.length } Comments</div>
                     <div className="share_count">1 share</div>
                 </div>
             </div>
@@ -162,7 +176,7 @@ const Post = ({ post, user, profile }) => {
                     onMouseLeave={() => setTimeout(() => { setVisible(false) }, 500)}
                     onClick={() => reacthandler(check ? check : 'like')}
                 >
-                   {
+                    {
                         check ? <img src={`../../../reacts/${check}.svg`} style={{ width: '18px' }} className='small_react' alt={check} /> : <>
                             <AiOutlineLike style={{ fontSize: "18px" }} />
                         </>
@@ -181,7 +195,7 @@ const Post = ({ post, user, profile }) => {
                 </div>
                 <div className="post_action hover1">
                     <FaRegComment style={{ fontSize: "20px" }} />
-                    <span>Comment</span>
+                    <span> Comments</span>
                 </div>
                 <div className="post_action hover1">
                     <PiShareFatThin style={{ fontSize: "20px" }} />
@@ -190,9 +204,18 @@ const Post = ({ post, user, profile }) => {
             </div>
 
             <div className="comments_wrap">
-                <div className="comments_order">
-                    <CreateComment user={user} />
-                </div>
+                <div className="comments_order">  </div>
+                <CreateComment user={user} postId={post?._id} setComments={setComments} setCount={ setCount} />
+                {
+                    comments && comments.sort((a, b) => {
+                        return new Date(b.commentAt) - new Date(a.commentAt);
+                    }).slice(0, count).map((comment, idx) => <Comment comment={comment} key={idx} />)
+                }
+                {
+                    count < comments.length && (
+                        <div className="view_comments" onClick={()=>showMore()}>View more comments</div>
+                    )
+                }
             </div>
             {
                 showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} />

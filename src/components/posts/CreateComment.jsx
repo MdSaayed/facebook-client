@@ -5,11 +5,16 @@ import { CiCamera } from "react-icons/ci";
 import { PiSticker } from "react-icons/pi";
 import { PiGifDuotone } from "react-icons/pi";
 import { IoIosClose } from "react-icons/io";
+import { comment } from "../../functions/post";
+import { uploadImages } from "../../functions/uploadImages";
+import dataURItoBlob from "../../helpers/dataURItoBlob";
+import { ClipLoader } from "react-spinners";
 
 
 
-const CreateComment = ({ user }) => {
+const CreateComment = ({ user, postId ,setCount,setComments}) => {
     const [picker, setPicker] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [text, setText] = useState("");
     const [commnetImage, setCommentImage] = useState("");
     const [cursorPosition, setCursorPosition] = useState();
@@ -50,6 +55,36 @@ const CreateComment = ({ user }) => {
         }
     }
 
+    // handle Comment
+    const handleComment = async (e) => {
+        if (e.key === "Enter") {
+            if (commnetImage != "") {
+                setLoading(true);
+                const img = dataURItoBlob(commnetImage);
+                const path = `${user?.username}/post Images/${postId}`;
+                let formData = new FormData();
+                formData.append("path", path);
+                formData.append("file", img);
+
+                const imgComment = await uploadImages(formData, path, user.token);
+                const comments = await comment(postId, text, imgComment[0].url, user?.token);
+                setComments(comments);
+                setCount((prev) => ++prev);
+                setLoading(false);
+                setText("");
+                setCommentImage("");
+            } else {
+                setLoading(true);
+                const comments = await comment(postId, text, "", user?.token);
+                setComments(comments);
+                setCount((prev) => ++prev);
+                setLoading(false);
+                setText("");
+                setCommentImage("");
+
+            }
+        }
+    }
 
     return (
         <div className="create_comment_wrap">
@@ -68,7 +103,10 @@ const CreateComment = ({ user }) => {
                             <button className="blue_btn" onClick={() => setError("")}>Try again</button>
                         </div>
                     }
-                    <input type="text" placeholder="Write a comment.." value={text} ref={textRef} onChange={(e) => setText(e.target.value)} />
+                    <input type="text" placeholder="Write a comment.." value={text} ref={textRef} onChange={(e) => setText(e.target.value)} onKeyUp={handleComment} />
+                    <div className="comment_circle" style={{ marginTop: "5px" }}>
+                        <ClipLoader size={20} color="#1876f2" loading={loading} />
+                    </div>
                     <div className="comment_circle_icon hover2" onClick={() => setPicker(prev => !prev)}>
                         <BsEmojiSmile />
                     </div>

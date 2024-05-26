@@ -35,8 +35,7 @@ const Header = ({ page }) => {
   useClickOutside(allMenu, () => {
     setShowAllMenu(false);
   });
-
-  console.log(page);
+ 
 
   return (
     <header>
@@ -81,7 +80,7 @@ const Header = ({ page }) => {
         </Link>
       </div>
       <div className="header_right">
-        <Link to={`/profile/${user.username}`} className={`profile_link hover1 ${page === "profile" ? "active_link" : ""}`}>
+        <Link to={`/profile/${user?.username}`} className={`profile_link hover1 ${page === "profile" ? "active_link" : ""}`}>
           <img src={user?.picture} alt="" />
           <span>{user?.first_name}</span>
         </Link>

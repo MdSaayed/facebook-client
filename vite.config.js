@@ -39,3 +39,10 @@ export default defineConfig({
 //   },
 // });
 
+
+/*
+1. after 4days login system  is not working
+2. .env is not working
+3. 
+
+ */

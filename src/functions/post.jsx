@@ -48,4 +48,25 @@ export const getReacts = async (postId, token) => {
         }
     }
 };
+export const comment = async (postId, comment, image, token) => {
+    try {
+        const { data } = await axios.put(`http://localhost:8000/comment`, {
+            postId,
+            comment,
+            image,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return data;
+    } catch (error) {
+        if (error.response) {
+            return error.response.data.message;
+        } else {
+            return 'An error occurred while fetching reacts.';
+        }
+    }
+};
+
 
