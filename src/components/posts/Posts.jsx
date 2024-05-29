@@ -10,7 +10,7 @@ const Posts = ({ user }) => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const { data } = await axios.get('https://facebook-eight-dun.vercel.app/getAllPosts', {
+                const { data } = await axios.get('http://localhost:8000/getAllPosts', {
                     headers: {
                         Authorization: `Bearer ${user?.token}`
                     }

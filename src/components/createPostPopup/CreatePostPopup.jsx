@@ -39,11 +39,11 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
                 background,
                 text,
                 null,
-                user.id,
-                user.token
+                user?.id,
+                user?.token
             );
             setLoading(false);
-            if (response === "ok") {
+            if (response.status === "ok") {
                 setBackground("");
                 setText("");
                 setShowPostbox(false);
@@ -55,7 +55,7 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
             const postImages = images.map((img) => {
                 return dataURItoBlob(img);
             });
-            const path = `${user.username}/post Images`;
+            const path = `${user?.username}/post Images`;
             let formData = new FormData();
             formData.append("path", path);
             postImages.forEach((image) => {
@@ -64,7 +64,7 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
             const response = await uploadImages(formData, path, user.token);
             const res = await createPost(null, null, text, response, user.id, user.token);
             setLoading(false);
-            if (res == "ok") {
+            if (res.status == "ok") {
                 setText("");
                 setImages("");
                 setShowPostbox(false);
@@ -82,7 +82,7 @@ const CreatePostPopup = ({ user, setShowPostbox }) => {
                 user.token
             );
             setLoading(false);
-            if (response === "ok") {
+            if (response.status === "ok") {
                 setBackground("");
                 setText("");
                 setShowPostbox(false);

@@ -17,6 +17,7 @@ import Comment from './Comment';
 const Post = ({ post, user, profile }) => {
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [checkSaved, setCheckSaved] = useState();
     const [reacts, setReacts] = useState([]);
     const [check, setCheck] = useState('');
     const [comments, setComments] = useState([]);
@@ -38,6 +39,7 @@ const Post = ({ post, user, profile }) => {
         setReacts(res?.reacts);
         setCheck(res.check);
         setTotalReact(res.reacts.reduce((total, react) => total + react.count, 0));
+        setCheckSaved(res?.checkSaved);
     }
 
     // Handle react
@@ -218,7 +220,7 @@ const Post = ({ post, user, profile }) => {
                 }
             </div>
             {
-                showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} />
+                showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} setShowMenu={setShowMenu} postId={post?._id} token={user?.token} checkSaved={checkSaved } setCheckSaved={setCheckSaved} />
             }
         </div>
     );
