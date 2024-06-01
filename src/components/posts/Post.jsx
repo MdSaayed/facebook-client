@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import Public from '../../../public/icons/svg/Public';
@@ -23,6 +23,7 @@ const Post = ({ post, user, profile }) => {
     const [comments, setComments] = useState([]);
     const [totalReact, setTotalReact] = useState(0);
     const [count, setCount] = useState(1);
+    const postRef = useRef(null);
 
     useEffect(() => {
         getPostReacts();
@@ -80,7 +81,7 @@ const Post = ({ post, user, profile }) => {
 
 
     return (
-        <div className='post' style={{ width: `${profile && "100%"}` }}>
+        <div className='post' style={{ width: `${profile && "100%"}` }} ref={postRef}>
             <div className="post_header">
                 <Link to={`/profile/${post.user.username}`} className="post_header_left">
                     <img src={post?.user?.picture} alt={post?.user?.username} />
@@ -220,7 +221,7 @@ const Post = ({ post, user, profile }) => {
                 }
             </div>
             {
-                showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} setShowMenu={setShowMenu} postId={post?._id} token={user?.token} checkSaved={checkSaved } setCheckSaved={setCheckSaved} />
+                showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} setShowMenu={setShowMenu} postId={post?._id} token={user?.token} checkSaved={checkSaved} setCheckSaved={setCheckSaved} images={post?.images} postRef={ postRef} />
             }
         </div>
     );

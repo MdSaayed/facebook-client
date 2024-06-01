@@ -87,4 +87,22 @@ export const savePost = async (postId,   token) => {
     }
 };
 
+export const deletePost = async (postId, token) => {
+    try {
+        const { data } = await axios.delete(`http://localhost:8000/deletePost/${postId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return data;
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        if (error.response) {
+            return error.response.data.message;
+        } else {
+            return 'An error occurred while deleting the post.';
+        }
+    }
+};
+
 
