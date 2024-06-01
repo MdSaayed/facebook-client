@@ -157,3 +157,20 @@ export const deleteRequest = async (id, token) => {
     return error.response.data.message;
   }
 };
+export const search = async (searchTerm, token) => {
+  try {
+    const { data } = await axios.post(
+      `http://localhost:8000/search/${searchTerm}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
