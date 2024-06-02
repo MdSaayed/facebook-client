@@ -208,7 +208,6 @@ const Post = ({ post, user, profile }) => {
 
             <div className="comments_wrap">
                 <div className="comments_order">  </div>
-                <CreateComment user={user} postId={post?._id} setComments={setComments} setCount={ setCount} />
                 {
                     comments && comments.sort((a, b) => {
                         return new Date(b.commentAt) - new Date(a.commentAt);
@@ -219,6 +218,8 @@ const Post = ({ post, user, profile }) => {
                         <div className="view_comments" onClick={()=>showMore()}>View more comments</div>
                     )
                 }
+                <CreateComment user={user} postId={post?._id} setComments={setComments} setCount={ setCount} />
+            
             </div>
             {
                 showMenu && <PostMenu userId={user.id} postUserId={post.user._id} imagesLength={post?.images?.length} setShowMenu={setShowMenu} postId={post?._id} token={user?.token} checkSaved={checkSaved} setCheckSaved={setCheckSaved} images={post?.images} postRef={ postRef} />

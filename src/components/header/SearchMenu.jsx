@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ReturnIcon from "../../../public/icons/svg/ReturnIcon";
 import Search from "../search/Search";
 import useClickOutside from "../../helpers/useClickOutside";
-import { addToSearchHistory, getSearchHistory, removeFromSearch, search } from "../../functions/user";
+import { addToSearchHistory, getSearchHistory, search } from "../../functions/user";
 import { Link } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 
@@ -20,8 +20,9 @@ const SearchMenu = ({ color, setShowSearchMenu, token }) => {
   });
 
   useEffect(() => {
+    input.current.focus();
     getHistory();
-  }, [searchHistory]);
+  }, []);
 
   const getHistory = async () => {
     const res = await getSearchHistory(token);
@@ -42,14 +43,6 @@ const SearchMenu = ({ color, setShowSearchMenu, token }) => {
     getHistory();
   };
 
-  // search remove
- const handleRemove = async (searchUser) => {
-    await removeFromSearch(searchUser, token);
-    const filteredHistory = searchHistory.filter(item => !item.includes(searchUser));
-   setSearchHistory(filteredHistory);
-}
-
-
 
   return (
     <div className="header_left search_area scrollbar" ref={menu}>
@@ -69,7 +62,7 @@ const SearchMenu = ({ color, setShowSearchMenu, token }) => {
           }}
         >
           {iconVisible && (
-            <div className="search_icon_wrap">
+            <div>
               <Search color={color} />
             </div>
           )}
@@ -96,15 +89,15 @@ const SearchMenu = ({ color, setShowSearchMenu, token }) => {
         </div>
       )}
       <div className="search_history scrollbar">
-        {searchHistory?.length > 0 && result.length === 0 && searchHistory.sort((a, b) => {
+        {searchHistory.length > 0 && result.length === 0 && searchHistory.sort((a,b)=>{
           return new Date(b.createdAt) - new Date(a.createdAt);
         }).map((item) => (
           <div className="search_user_item hover1" key={item?._id}>
             <Link className="flex" to={`/profile/${item.user?.username}`} onClick={() => addToSearchHistoryHandler(item.user?._id)}>
               <img src={item.user?.picture} alt="" />
               <span>{item.user?.first_name} {item.user?.last_name}</span>
+              <MdClose />
             </Link>
-              <MdClose onClick={() => handleRemove(item?.user?._id)} />
           </div>
         ))}
       </div>
