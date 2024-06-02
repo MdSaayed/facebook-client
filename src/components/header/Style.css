@@ -196,11 +196,12 @@ header {
 }
 
 .search_area .search input {
-  padding-left: 4px;
+  padding-left: 22px;
 }
 
-.search_area .search svg {
-  transform: translateY(-2px);
+.search_area .search_icon_wrap{
+  transform: translateY(-1px);
+  position: absolute;
 }
 
 .search_area .search input::placeholder {
@@ -670,9 +671,6 @@ header {
   transform: scale(1);
 }
 
-.search_user_item .flex {
-  width: 100%;
-}
 
 /*-------User menu----*/
 
