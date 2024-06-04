@@ -6,6 +6,7 @@ import Profile from "../pages/profile/Profile";
 import Private from "../routers/Private";
 import Activated from "../pages/home/active";
 import Reset from "../pages/reset/reset";
+import Friends from "../pages/friends/Friends";
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,14 @@ const router = createBrowserRouter([
       {
         path: "/profile/:username",
         element: <Private> <Profile /></Private>,
+      },
+      {
+        path: "/friends",
+        element: <Private> <Friends /></Private>,
+      },
+      {
+        path: "/friends/:type",
+        element: <Private> <Friends /></Private>,
       },
       {
         path: "/activate/:token",

@@ -69,7 +69,7 @@ const Header = ({ page }) => {
           <Watch color={page === "video" ? color : "#65676b"} />
           <div className="middle_notification">9+</div>
         </Link>
-        <Link className="middle_icon hover1">
+        <Link to="/friends" className={`middle_icon ${page === "friends" ? 'active' : 'hover1'}`}>
           <FriendsIcon color={page === "friends" ? color : "#65676b"} />
         </Link>
         <Link className="middle_icon hover1">
