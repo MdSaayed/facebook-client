@@ -92,10 +92,10 @@ const Header = ({ page }) => {
           </div>
           {showAllMenu && <AllMenu />}
         </div>
-        <div className="circle_icon hover1">
+        <div className="circle_icon hover1 ">
           <MessangerIcon />
         </div>
-        <div className="circle_icon hover1">
+        <div className="circle_icon hover1 ">
           <NotificationIcon />
           <div className="right_notification">5</div>
         </div>

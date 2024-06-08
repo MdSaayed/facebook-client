@@ -55,7 +55,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>
@@ -69,7 +68,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>
@@ -83,7 +81,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>
@@ -92,7 +89,6 @@ const AllMenu = () => {
             {menu?.slice(11, 15).map((item, idx) => (
               <>
                 <AllMenuItem key={idx} name={item.name} description={item.description} icon={item.icon} />
-                ;
               </>
             ))}
           </div>
@@ -106,7 +102,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>
@@ -120,7 +115,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>
@@ -134,7 +128,6 @@ const AllMenu = () => {
                   description={item.description}
                   icon={item.icon}
                 />
-                ;
               </>
             ))}
           </div>

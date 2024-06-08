@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import ProfilePicture from "../../components/profielPicture/ProfilePicture";
 import Friendship from "./Friendship";
 import { Link } from "react-router-dom";
+import { MdEdit } from "react-icons/md";
+
 
 export default function ProfielPictureInfos({ profile, visitor, photos, othername, }) {
   const [show, setShow] = useState(false);
@@ -63,7 +65,7 @@ export default function ProfielPictureInfos({ profile, visitor, photos, othernam
               <span>Add to story</span>
             </div>
             <div className="gray_btn">
-              <i className="edit_icon"></i>
+              <MdEdit className="edit_icon"></MdEdit>
               <span>Edit profile</span>
             </div>
           </div>

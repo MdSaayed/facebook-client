@@ -100,6 +100,9 @@
   border-radius: 50%;
   cursor: pointer;
 }
+.slider_circle svg {
+    color: #ced0d4;
+}
 .flex_up {
   display: flex;
   align-items: center;

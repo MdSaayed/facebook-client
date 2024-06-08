@@ -7,6 +7,7 @@ import Private from "../routers/Private";
 import Activated from "../pages/home/active";
 import Reset from "../pages/reset/reset";
 import Friends from "../pages/friends/Friends";
+import "../style/dark.css";
 
 
 const router = createBrowserRouter([

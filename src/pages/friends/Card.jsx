@@ -30,7 +30,7 @@ const Card = ({ userr, type, getData }) => {
 
     return (
         <div className='req_card'>
-            <Link to={`/profile/${userr?.userrname}`}>
+            <Link to={`/profile/${userr?.username}`}>
                 <img src={userr?.picture} alt="" />
             </Link>
             {userr.first_name} {userr.last_name}

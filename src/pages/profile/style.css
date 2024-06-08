@@ -369,8 +369,9 @@
   height: 100%;
   cursor: pointer;
 }
-.profile_photo_card:hover{
-filter: brightness(110%);
+
+.profile_photo_card:hover {
+  filter: brightness(110%);
 }
 
 .profile_photo_card img {
@@ -379,26 +380,31 @@ filter: brightness(110%);
   object-fit: cover;
   border-radius: 10px;
 }
-.profile_photo_card span{
-color: var(--color-primary);
-font-size: 14px;
-padding-left: 1px;
+
+.profile_photo_card span {
+  color: var(--color-primary);
+  font-size: 14px;
+  padding-left: 1px;
 }
-.profile_friend_count{
-font-weight: 600;
+
+.profile_friend_count {
+  font-weight: 600;
 }
-.profile_friend_imgs{
-display: flex;
-align-items: center;
+
+.profile_friend_imgs {
+  display: flex;
+  align-items: center;
 }
-.profile_friend_imgs img{
-width: 32px;
-height: 32px;
-border-radius: 50%;
-box-shadow: 0 1px 2px var(--shadow-1);
+
+.profile_friend_imgs img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px var(--shadow-1);
 }
-.profile_friend_imgs img:hover{
-filter: brightness(110%);
+
+.profile_friend_imgs img:hover {
+  filter: brightness(110%);
 }
 
 /* profile card */
@@ -409,6 +415,10 @@ filter: brightness(110%);
 .cover_crooper img {
   object-fit: cover;
   width: 100%;
+}
+
+.friends_menu_wrap {
+  position: relative;
 }
 
 .cover_crooper .reactEasyCrop_Container {
@@ -532,20 +542,24 @@ filter: brightness(110%);
   .bottom_container {
     padding: 5px;
   }
-.friendship{
-transform: translateY(-4rem);
-}
-.othername{
-transform: translateY(-10px);
-}
-.profile_friend_count{
-text-align: center;
-transform: translateY(-16px);
-}
-.profile_friend_imgs{
-justify-content: center;
-transform: translateY(-15px);
-}
+
+  .friendship {
+    transform: translateY(-4rem);
+  }
+
+  .othername {
+    transform: translateY(-10px);
+  }
+
+  .profile_friend_count {
+    text-align: center;
+    transform: translateY(-16px);
+  }
+
+  .profile_friend_imgs {
+    justify-content: center;
+    transform: translateY(-15px);
+  }
 }
 
 @media (max-width: 650px) {
@@ -559,6 +573,7 @@ transform: translateY(-15px);
     bottom: 3rem;
   }
 }
+
 @media (max-width: 405px) {
   .friendship {
     flex-direction: column;
@@ -582,18 +597,20 @@ transform: translateY(-15px);
 .showMore .profile_left {
   top: 54px;
 }
-.friendship{
-z-index: 9;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-.friendship .blue_btn{
-height: 34px;
+
+.friendship {
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-@media (min-width:900px){
-.friendship{
-transform: translateX(-2rem);
+.friendship .blue_btn {
+  height: 34px;
 }
+
+@media (min-width:900px) {
+  .friendship {
+    transform: translateX(-2rem);
+  }
 }

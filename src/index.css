@@ -3,18 +3,21 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  background: var(--bg-secondary);
 
 }
+
 html {
   overflow-y: scroll;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 :root {
   --bg-primary: #fff;
   --bg-secondary: #f0f2f5;
@@ -55,6 +58,7 @@ a {
   gap: 6px;
   cursor: pointer;
 }
+
 .light_blue_btn {
   border: none;
   outline: none;
@@ -71,6 +75,7 @@ a {
   gap: 6px;
   cursor: pointer;
 }
+
 .gray_btn {
   border: none;
   outline: none;
@@ -80,13 +85,14 @@ a {
   font-family: inherit;
   font-weight: 600;
   font-size: 14px;
-  color: #111;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   cursor: pointer;
 }
+
 /*----Buttons----*/
 .blur {
   position: fixed;
@@ -104,12 +110,15 @@ a {
 .hover1:hover {
   background: var(--bg-secondary);
 }
+
 .hover2:hover {
   background: var(--bg-third);
 }
+
 .hover3:hover {
   background: #d4d6da3a;
 }
+
 /*-----Hovers-----*/
 .card {
   height: 500px;
@@ -122,10 +131,12 @@ a {
 .scrollbar::-webkit-scrollbar {
   width: 8px;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
   background: #aeaeafa1;
   border-radius: 5px;
 }
+
 /*----Scrollbar----*/
 
 /*---Circles------*/
@@ -141,22 +152,12 @@ a {
   background: var(--bg-third);
   cursor: pointer;
 }
+
 /*---Circles------*/
 
 /*----filters---*/
 .filter_blue {
-  filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%)
-    saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg)
-    brightness(97%) contrast(96%);
+  filter: invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg) brightness(97%) contrast(96%);
 }
+
 /*----filters---*/
-
-
-
-
-
-
-
-
-
-

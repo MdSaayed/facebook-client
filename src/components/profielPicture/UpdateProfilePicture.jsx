@@ -9,10 +9,15 @@ import { createPost } from "../../functions/post";
 import { uploadImages } from "../../functions/uploadImages";
 import { updateprofilePicture } from "../../functions/user";
 import useOnClickOutside from "../../helpers/useClickOutside";
-
+import { MdEdit } from "react-icons/md";
+import { FaMinus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import getCroppedImg from "../../helpers/getCroppedImg";
 import PulseLoader from "react-spinners/PulseLoader";
 import Cookies from "js-cookie";
+
+
+
 export default function UpdateProfilePicture({
   setImage,
   image,
@@ -147,7 +152,7 @@ export default function UpdateProfilePicture({
         </div>
         <div className="slider">
           <div className="slider_circle hover1" onClick={() => zoomOut()}>
-            <i className="minus_icon"></i>
+            <FaMinus className="minus_icon"></FaMinus>
           </div>
           <input
             type="range"
@@ -159,7 +164,7 @@ export default function UpdateProfilePicture({
             onChange={(e) => setZoom(e.target.value)}
           />
           <div className="slider_circle hover1" onClick={() => zoomIn()}>
-            <i className="plus_icon"></i>
+            <FaPlus className="plus_icon"></FaPlus>
           </div>
         </div>
       </div>
