@@ -17,6 +17,9 @@ import Friends from "./Friends";
 import { useMediaQuery } from "react-responsive";
 import ProfielPictureInfos from "./ProfielPictureInfos";
 import Intro from "../../components/intro/Intro";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { HashLoader } from "react-spinners";
 
 const Profile = () => {
     const [showPostBox, setShowPostbox] = useState(false);
@@ -106,14 +109,83 @@ const Profile = () => {
         setScrollHeight(window.pageYOffset);
     };
 
-
     return (
         <div className="profile">
             <Header page="profile" />
             <div className="profile_top" ref={profileTop}>
                 <div className="profile_container">
-                    <Cover cover={profile.cover} visitor={visitor} photos={photos.resources} />
-                    <ProfielPictureInfos profile={profile} visitor={visitor} photos={photos.resources} othername={othername} />
+                    {
+                        loading ? (
+                            <SkeletonTheme baseColor="#ccc" highlightColor="#ddd">
+                                <div className="profile_cover">
+                                    <Skeleton height={347} containerClassName="avatar-skeleton" style={{
+                                        borderBottomLeftRadius: "8px",
+                                        borderBottomRightRadius: "8px"
+                                    }} />
+                                </div>
+                                <div className="profile_img_wrap" style={{ marginBottom: "-3.2rem", transform: "translateY(-8px)" }}>
+                                    <div className="profile_w_left">
+                                        <Skeleton
+                                            circle
+                                            height={180}
+                                            width={180}
+                                            containerClassName="avatar-skeleton"
+                                            style={{ transform: "translateY(-3.3rem)" }}
+                                        />
+                                        <div className="profile_w_col">
+                                            <div className="profile_name">
+                                                <Skeleton
+                                                    height={35}
+                                                    width={200}
+                                                    containerClassName="avatar-skeleton"
+                                                />
+                                                <Skeleton
+                                                    height={30}
+                                                    width={100}
+                                                    containerClassName="avatar-skeleton"
+                                                    style={{ transform: "translateY(2.5px)" }}
+                                                />
+                                            </div>
+                                            <div className="profile_friend_count">
+                                                <Skeleton
+                                                    height={20}
+                                                    width={90}
+                                                    containerClassName="avatar-skeleton"
+                                                    style={{ marginTop: "5px" }}
+                                                />
+                                            </div>
+                                            <div className="profile_friend_imgs">
+                                                {Array.from({ length: 6 }).map((_, idx) => (
+                                                    <Skeleton
+                                                        circle
+                                                        key={idx}
+                                                        height={32}
+                                                        width={32}
+                                                        containerClassName="avatar-skeleton"
+                                                        style={{ transform: `translateX(${-idx * 7}px)` }}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={`friendship ${!visitor && "fix"}`}>
+                                        <Skeleton height={36} width={120} containerClassName="avatar-skeleton" />
+                                        <div className="flex">
+                                            <Skeleton height={36} width={120} containerClassName="avatar-skeleton" />
+                                            {visitor && (
+                                                <Skeleton height={36} width={120} containerClassName="avatar-skeleton" />
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </SkeletonTheme>
+                        ) : (
+                            <>
+                                <Cover cover={profile.cover} visitor={visitor} photos={photos.resources} />
+                                <ProfielPictureInfos profile={profile} visitor={visitor} photos={photos.resources} othername={othername} />
+                            </>
+                        )
+                    }
                     <ProfileMenu />
                 </div>
             </div>
@@ -123,13 +195,48 @@ const Profile = () => {
                         <PpYouMayKnow />
                         <div className={`profile_grid ${check && scrollHeight >= height && leftHeight > 1000 ? "scrollFixed showLess" : check && scrollHeight >= height && leftHeight < 1000 && "scrollFixed showMore"}`}>
                             <div className="profile_left" ref={leftSide}>
-                                <Intro
-                                    detailss={profile.details}
-                                    visitor={visitor}
-                                    setOthername={setOthername}
-                                />
-                                < Photos username={userName} token={user.token} photos={photos} />
-                                <Friends friends={profile.friends} />
+                                {
+                                    loading ? <>
+                                        <div className="profile_card">
+                                            <div className="profile_card_header">
+                                                Intro
+                                            </div>
+                                            <div className="skeleton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
+                                        </div>
+                                        <div className="profile_card">
+                                            <div className="profile_card_header">
+                                                Photos
+                                                <div className="profile_header_link">
+                                                    See all photos
+                                                </div>
+                                            </div>
+                                            <div className="skeleton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
+                                        </div>
+                                        <div className="profile_card">
+                                            <div className="profile_card_header">
+                                                Friends
+                                                <div className="profile_header_link">
+                                                    See all Friends
+                                                </div>
+                                            </div>
+                                            <div className="skeleton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
+                                        </div>
+                                    </> : <>
+                                        <Intro
+                                            detailss={profile.details}
+                                            visitor={visitor}
+                                            setOthername={setOthername}
+                                        />
+                                        <Photos username={userName} token={user.token} photos={photos} />
+                                        <Friends friends={profile.friends} />
+                                    </>
+                                }
                                 <div className="relative_fb_copyright">
                                     <Link to={"/"}>Privacy</Link>
                                     <span>. </span>
@@ -156,11 +263,18 @@ const Profile = () => {
                                     </>
                                 )}
                                 <GridPosts />
-                                <div className="posts">
-                                    {profile.posts && profile.posts.length ? profile.posts.map((post, idx) => <Post post={post} user={user} key={idx} profile={profile} />) : (
-                                        <div className="no_posts">No Posts available.</div>
-                                    )}
-                                </div>
+
+                                {
+                                    loading ? <div className="skeleton_loader">
+                                        <HashLoader color="#1876f2" />
+                                    </div> : <>
+                                        <div className="posts">
+                                            {profile.posts && profile.posts.length ? profile.posts.map((post, idx) => <Post post={post} user={user} key={idx} profile={profile} />) : (
+                                                <div className="no_posts">No Posts available.</div>
+                                            )}
+                                        </div>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>

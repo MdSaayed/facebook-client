@@ -614,3 +614,15 @@
     transform: translateX(-2rem);
   }
 }
+
+/* skeleton */
+.fix {
+  flex-direction: row !important;
+}
+
+.skeleton_loader {
+  height: 100px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}

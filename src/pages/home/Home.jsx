@@ -10,11 +10,13 @@ import SendVerification from "../../components/home/sendVerification/SendVerific
 import CreatePostPopup from "../../components/createPostPopup/CreatePostPopup";
 import Posts from "../../components/posts/Posts";
 import "./style.css";
+import { HashLoader } from "react-spinners";
 
 const Home = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [showPostBox, setShowPostbox] = useState(false);
-  const [height, setHeight] = useState(); 
+  const [height, setHeight] = useState();
+  const [loading, setLoading] = useState(true);
   const middle = useRef(null);
   const el = useRef(null);
 
@@ -24,7 +26,10 @@ const Home = () => {
 
   useEffect(() => {
     const updateHeight = () => {
+      if (middle.current) {
         setHeight(middle.current.clientHeight);
+        setLoading(false);
+      }
     };
 
     const resizeObserver = new ResizeObserver(updateHeight);
@@ -43,7 +48,7 @@ const Home = () => {
   }, []);
 
   return (
-<div className="home" style={{ height: height ?`${height+100}px` : `${height}vh` }}>
+    <div className="home" style={{ height: height ? `${height + 100}px` : '100vh' }}>
       <Header page="home" />
       {showPostBox && <CreatePostPopup user={user} setShowPostbox={setShowPostbox} />}
       <LeftHome user={user} />
@@ -51,7 +56,13 @@ const Home = () => {
         <Stories />
         {user.verified === false && <SendVerification user={user} />}
         <CreatePost user={user} setShowPostbox={setShowPostbox} />
-        <Posts user={user} />
+        {loading ? (
+          <div className="skeleton_loader">
+            <HashLoader color="#1876f2" />
+          </div>
+        ) : (
+          <Posts user={user} />
+        )}
       </div>
       <RightHome user={user} />
     </div>
